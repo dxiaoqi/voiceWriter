@@ -22,6 +22,7 @@ export default function MicrophoneComponent() {
   const [value, setValue] = useState('');
   const { tasks, updateTasks } = useContext(TaskContext) || {};
   const [blocked, setBlocked] = useState(false);
+  const [iseGen, setIsGen] = useState(false);
   const onStart = () => {
     startTimer();
   }
@@ -33,6 +34,7 @@ export default function MicrophoneComponent() {
     // You could do something here after listening has finished
     stopTimer();
     resetTimer();
+    setIsGen(true)
     const data = await fetch('/api/voice', {
       method: 'POST',
       headers: {
@@ -50,6 +52,7 @@ export default function MicrophoneComponent() {
       id: (tasks || [])?.length + 1,
       time: dayjs().format('YYYY-MM-DD')
     } as unknown as Task])
+    setIsGen(false)
   };
 
   const onResult = (result: string) => {
@@ -82,7 +85,6 @@ export default function MicrophoneComponent() {
   return (
     <div className="flex items-center justify-center">
       <div className="w-full">
-        <>{value}</>
         <div className="flex items-center w-full">
 
           {isRecording ? (
@@ -92,7 +94,9 @@ export default function MicrophoneComponent() {
             >
               <Icon icon="pepicons-pop:pause-circle-filled" fontSize={26} style={{ color: '#f4511e' }} />
             </button>
-          ) : (
+          ) : iseGen ? (<button>
+            <Icon icon="line-md:loading-alt-loop" fontSize={26} style={{ color: '#f4511e' }} />
+          </button>) : (
             // Button for starting recording
             <button
               onClick={handleToggleRecording}
