@@ -82,7 +82,9 @@ export default function MicrophoneComponent() {
   return (
     <div className="flex items-center justify-center">
       <div className="w-full">
+        <>{value}</>
         <div className="flex items-center w-full">
+
           {isRecording ? (
             // Button for stopping recording
             <button
