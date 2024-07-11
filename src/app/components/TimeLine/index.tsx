@@ -7,7 +7,8 @@ export const TimeLine = ({ children, className }: any) => {
   const { tasks } = useContext(TaskContext) || {};
   const list = sortTasksByTime(tasks || []);
   return (
-    <div className={cn("bg-white border mb-6 overflow-x-auto border-gray-200 rounded-2xl p-4 space-y-3 dark:bg-neutral-900 dark:border-neutral-700", className)}>
+    <div className={cn("bg-white mt-2 border mb-6 overflow-x-auto border-gray-200 rounded-2xl p-4 space-y-3 dark:bg-neutral-900 dark:border-neutral-700", className)}>
+      {list?.length === 0 && <p>Try Start Your Story</p>}
       {
         list.map(l => (
           <div key={l.time}>
