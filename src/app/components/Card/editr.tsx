@@ -52,7 +52,7 @@ export default function Edit(props: CardProps) {
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
-        scrollBehavior="outside"
+        scrollBehavior="inside"
       >
         <ModalContent>
           {(onClose) => (

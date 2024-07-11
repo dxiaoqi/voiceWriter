@@ -79,30 +79,6 @@ export default function MicrophoneComponent() {
     }
   }, [isRecording, listen, stop])
 
-  useEffect(() => {
-    async function a () {
-    const data = await fetch('/api/voice', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        text: '今天做了西红柿炒鸡蛋，主要使用了西红柿跟鸡蛋，就是盐方的有点少了'
-      }),
-    })
-    const res = JSON.parse(await data.text());
-    console.log(JSON.parse(JSON.stringify(res.message)))
-    const msg: Task  = JSON.parse(res.message);
-    updateTasks?.([...(tasks || []), {
-      title: msg.title,
-      content: msg.content,
-      id: (tasks || [])?.length + 1,
-      time: dayjs().format('YYYY-MM-DD')
-    } as unknown as Task])
-    }
-    a();
-  }, [])
-
   return (
     <div className="flex items-center justify-center">
       <div className="w-full">
