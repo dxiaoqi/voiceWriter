@@ -1,6 +1,6 @@
 import axios from 'axios';
 export async function POST(request: any) {
- const res = await request.json()
+ const _res = await request.json()
 const payload = {
   "model": "abab6.5s-chat",
   "tokens_to_generate": 2048,
@@ -17,7 +17,7 @@ const payload = {
     {
       "sender_type": "USER",
       "sender_name": "用户",
-      "text": res.text
+      "text": _res.text
     },
   ],
   "bot_setting": [
@@ -38,7 +38,7 @@ const payload = {
     },
     data: payload
   }) 
-  console.log(111, res.data.reply)
+  console.log(111, _res.text, res.data.reply)
     return Response.json({
       revalidated: false,
       now: Date.now(),
